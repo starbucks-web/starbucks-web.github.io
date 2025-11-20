@@ -6,18 +6,20 @@
     <title>2025 JCB晶緻卡 × 星巴克獨享禮遇</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
-        .header{padding:20px 0;text-align:center;background:#0F1621}
-        .jcb-logo{max-width:72px;margin-bottom:12px}
+        body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;line-height:1.5;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+        .header{padding:20px 0 10px;text-align:center;background:#0F1621}
+        .jcb-logo{max-width:72px;margin:0 auto 10px;display:block}
+
         .title{font-size:28px;font-weight:900;color:#FFC600;letter-spacing:1px;margin:8px 0}
         .subtitle{font-size:17px;color:#E0E0E0;margin-bottom:20px}
 
+        /* 圓形標籤 - 完全固定尺寸，絕不震動 */
         .circle-badge{
             width:120px;height:120px;background:#FF5E38;border-radius:50%;
             margin:35px auto 40px;display:flex;align-items:center;justify-content:center;
             box-shadow:0 10px 30px rgba(255,94,56,0.4);
             font-size:19px;font-weight:900;color:white;line-height:1.2;
-            text-align:center;border:4px solid #FFF3E0
+            text-align:center;border:4px solid #FFF3E0;flex-shrink:0
         }
 
         .box{background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:24px;
@@ -49,14 +51,15 @@
 <body>
 
     <div class="header">
-        <!-- 超穩雙重保險 JCB Logo（官方正在用的圖，永不擋） -->
-        <img src="https://www.jcb.co.jp/promotion/2025/starbucks/img/logo-jcb.png" 
-             onerror="this.src='https://cache.jcb.co.jp/common/img/logo-jcb-w.svg'" 
-             class="jcb-logo" alt="JCB">
+        <!-- 雙重保險 JCB Logo，絕不閃 -->
+        <img src="https://cache.jcb.co.jp/common/img/logo-jcb-w.svg"
+             onerror="this.src='https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg'"
+             class="jcb-logo" alt="JCB" loading="eager">
         <div class="title">2025 獨享禮遇</div>
         <div class="subtitle">JCB晶緻卡 × 星巴克</div>
     </div>
 
+    <!-- 圓形標籤純文字版，0 圖片 = 0 閃爍 -->
     <div class="circle-badge">
         前1000名<br>送咖啡
     </div>
