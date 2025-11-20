@@ -8,7 +8,7 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
         .header{padding:20px 0;text-align:center;background:#0F1621}
-        .jcb-logo{max-width:68px;margin-bottom:12px}
+        .jcb-logo{max-width:72px;margin-bottom:12px}
         .title{font-size:28px;font-weight:900;color:#FFC600;letter-spacing:1px;margin:8px 0}
         .subtitle{font-size:17px;color:#E0E0E0;margin-bottom:20px}
 
@@ -49,7 +49,10 @@
 <body>
 
     <div class="header">
-        <img src="https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg" class="jcb-logo" alt="JCB">
+        <!-- 超穩雙重保險 JCB Logo（官方正在用的圖，永不擋） -->
+        <img src="https://www.jcb.co.jp/promotion/2025/starbucks/img/logo-jcb.png" 
+             onerror="this.src='https://cache.jcb.co.jp/common/img/logo-jcb-w.svg'" 
+             class="jcb-logo" alt="JCB">
         <div class="title">2025 獨享禮遇</div>
         <div class="subtitle">JCB晶緻卡 × 星巴克</div>
     </div>
