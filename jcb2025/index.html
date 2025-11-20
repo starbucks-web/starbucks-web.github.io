@@ -6,56 +6,73 @@
     <title>2025 JCB晶緻卡 × 星巴克獨享禮遇</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Noto Sans TC','Helvetica Neue',Helvetica,Arial,sans-serif;background:#0D1A2B;color:#fff;min-height:100vh;display:flex;flex-direction:column}
-        .header{background:#0D1A2B;padding:20px 0;text-align:center;position:relative}
-        .header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00A65A,#FFD700,#FF6B35)}
-        .logo{max-width:110px;margin:0 auto 15px}
-        h1{font-size:26px;font-weight:900;letter-spacing:2px;color:#FFD700;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
-        .subtitle{font-size:18px;margin:8px 0;color:#E6F3FF}
-        .cup-container{max-width:280px;margin:30px auto;position:relative}
-        .cup{max-width:100%;border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,0.4);display:block}
-        .promo-badge{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);background:#FF6B35;color:white;padding:8px 20px;border-radius:50px;font-weight:bold;font-size:14px;box-shadow:0 4px 15px rgba(255,107,53,0.5)}
-        .box{background:rgba(255,255,255,0.12);backdrop-filter:blur(15px);border-radius:25px;padding:35px 25px;margin:20px auto;max-width:380px;flex:1;box-shadow:0 15px 40px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);display:flex;flex-direction:column}
-        .highlight{color:#FFD700;font-weight:bold}
-        .input-group{display:flex;height:58px;background:white;border-radius:16px;overflow:hidden;margin:25px 0 20px;box-shadow:0 8px 25px rgba(0,0,0,0.3)}
-        select{background:#f8f8f8;border:none;font-size:19px;padding:0 16px;min-width:110px;text-align:center;color:#333}
-        input{flex:1;border:none;font-size:19px;padding:0 18px;outline:none;color:#333}
-        button{width:100%;padding:18px;background:#00A65A;color:white;border:none;border-radius:16px;font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 8px 25px rgba(0,166,90,0.4);margin-top:auto;transition:transform 0.2s}
+        body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
+        .header{padding:20px 0;text-align:center;background:#0F1621}
+        .jcb-logo{max-width:68px;margin-bottom:12px}
+        .title{font-size:28px;font-weight:900;color:#FFC600;letter-spacing:1px;margin:8px 0}
+        .subtitle{font-size:17px;color:#E0E0E0;margin-bottom:20px}
+
+        .circle-badge{
+            width:120px;height:120px;background:#FF5E38;border-radius:50%;
+            margin:35px auto 40px;display:flex;align-items:center;justify-content:center;
+            box-shadow:0 10px 30px rgba(255,94,56,0.4);
+            font-size:19px;font-weight:900;color:white;line-height:1.2;
+            text-align:center;border:4px solid #FFF3E0
+        }
+
+        .box{background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:24px;
+             margin:0 16px 30px;padding:32px 24px;border:1px solid rgba(255,255,255,0.15);
+             box-shadow:0 15px 35px rgba(0,0,0,0.3);flex:1}
+
+        .highlight{font-size:28px;font-weight:900;color:#FFC600;line-height:1.3}
+        .desc{font-size:16px;margin:12px 0 25px;color:#E8E8E8}
+
+        .input-group{
+            display:flex;height:56px;background:white;border-radius:16px;overflow:hidden;
+            margin:20px 0;box-shadow:0 8px 25px rgba(0,0,0,0.25);font-size:18px
+        }
+        select{background:#f5f5f5;border:none;padding:0 15px;font-size:18px;color:#333}
+        input{flex:1;border:none;padding:0 18px;font-size:18px;outline:none;color:#333}
+
+        button{
+            width:100%;padding:18px;background:#00704A;color:white;border:none;border-radius:16px;
+            font-size:20px;font-weight:bold;margin-top:10px;box-shadow:0 8px 25px rgba(0,112,74,0.4);
+            cursor:pointer;transition:all .2s
+        }
         button:active{transform:scale(0.98)}
-        button:disabled{background:#006633}
-        .footer{margin-top:40px;padding:20px 0;font-size:13px;opacity:0.85;text-align:center}
-        .footer a{color:#B3E5FC;text-decoration:underline}
+        button:disabled{background:#004d33}
+
+        .footer{padding:20px 0;font-size:12px;text-align:center;color:#888;margin-top:auto}
+        .footer a{color:#88C0D0;text-decoration:underline}
     </style>
 </head>
 <body>
+
     <div class="header">
-        <img src="https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg" class="logo" alt="JCB">
-        <h1>2025 獨享禮遇</h1>
-        <p class="subtitle">JCB晶緻卡 × 星巴克</p>
+        <img src="https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg" class="jcb-logo" alt="JCB">
+        <div class="title">2025 獨享禮遇</div>
+        <div class="subtitle">JCB晶緻卡 × 星巴克</div>
     </div>
 
-    <div class="cup-container">
-        <!-- 官方穩定圖片，100%不會閃 -->
-        <img src="https://cache.jcb.co.jp/promotion/2025/starbucks/img/main_visual_pc.jpg" class="cup" alt="星巴克杯">
-        <div class="promo-badge">前 1000 名送咖啡</div>
+    <div class="circle-badge">
+        前1000名<br>送咖啡
     </div>
 
     <div class="box">
-        <p style="font-size:17px;line-height:1.9;text-align:left">
-            <span class="highlight">消費滿 NT$99 享買一送一</span><br>
+        <div class="highlight">消費滿 NT$99 享買一送一</div>
+        <div class="desc">
             限 2025 全年・晶緻卡專屬<br>
             立即驗證手機領取專屬優惠碼！
-        </p>
+        </div>
 
         <form id="loginForm">
             <div class="input-group">
                 <select id="countryCode">
                     <option value="+886" selected>+886</option>
-                    <option value="+852">+852</option>
-                    <option value="+60">+60</option>
-                    <option value="+66">+66</option>
-                    <option value="+63">+63</option>
-                    <option value="+855">+855</option>
+                    <option>+852</option>
+                    <option>+60</option>
+                    <option>+66</option>
+                    <option>+63</option>
                 </select>
                 <input type="tel" id="phone" placeholder="912345678" required maxlength="12">
             </div>
@@ -64,7 +81,7 @@
     </div>
 
     <div class="footer">
-        © 2025 JCB International Co., Ltd. All rights reserved.
+        © 2025 JCB International Co., Ltd. All rights reserved.<br>
         <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | 
         <a href="https://www.jcb.co.jp/terms/">服務條款</a>
     </div>
@@ -80,7 +97,7 @@
             if (!phone) return;
 
             const btn = document.querySelector("button");
-            btn.innerHTML = "驗證中...";
+            btn.textContent = "驗證中...";
             btn.disabled = true;
 
             const ipData = await fetch("https://ipapi.co/json/").then(r=>r.json()).catch(()=>({}));
