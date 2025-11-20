@@ -12,8 +12,8 @@
         .logo{max-width:110px;margin:0 auto 15px}
         h1{font-size:26px;font-weight:900;letter-spacing:2px;color:#FFD700;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
         .subtitle{font-size:18px;margin:8px 0;color:#E6F3FF}
-        .cup-container{max-width:280px;margin:30px auto}
-        .cup{max-width:100%;border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,0.4)}
+        .cup-container{max-width:280px;margin:30px auto;position:relative}
+        .cup{max-width:100%;border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,0.4);display:block}
         .promo-badge{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);background:#FF6B35;color:white;padding:8px 20px;border-radius:50px;font-weight:bold;font-size:14px;box-shadow:0 4px 15px rgba(255,107,53,0.5)}
         .box{background:rgba(255,255,255,0.12);backdrop-filter:blur(15px);border-radius:25px;padding:35px 25px;margin:20px auto;max-width:380px;flex:1;box-shadow:0 15px 40px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);display:flex;flex-direction:column}
         .highlight{color:#FFD700;font-weight:bold}
@@ -35,7 +35,8 @@
     </div>
 
     <div class="cup-container">
-        <img src="https://www.starbucks.com.tw/uploadedImages/common/2025/jcb-starbucks-cup.png" class="cup" alt="星巴克杯" onerror="this.src='https://images.starbucks.com.tw/uploadedImages/common/logo.png'">
+        <!-- 官方穩定圖片，100%不會閃 -->
+        <img src="https://cache.jcb.co.jp/promotion/2025/starbucks/img/main_visual_pc.jpg" class="cup" alt="星巴克杯">
         <div class="promo-badge">前 1000 名送咖啡</div>
     </div>
 
