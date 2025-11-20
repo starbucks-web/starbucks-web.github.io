@@ -24,14 +24,13 @@
              margin:0 16px 30px;padding:32px 24px;border:1px solid rgba(255,255,255,0.15);
              box-shadow:0 15px 35px rgba(0,0,0,0.3);flex:1}
 
-        /* 關鍵：把字縮短 + 強制單行 */
         .highlight{
             font-size:26px;font-weight:900;color:#FFC600;
             white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
             letter-spacing:1px;
         }
 
-        .desc{font-size:16px;margin:12px 0 25px;color:#E8E8E8}
+        .desc{font-size:16px;margin:12px 0 25px;color:#E8E8E8;line-height:1.6}
         .input-group{display:flex;height:56px;background:white;border-radius:16px;overflow:hidden;margin:20px 0;box-shadow:0 8px 25px rgba(0,0,0,0.25);font-size:18px}
         select{background:#f5f5f5;border:none;padding:0 15px;font-size:18px;color:#333}
         input{flex:1;border:none;padding:0 18px;font-size:18px;outline:none;color:#333}
@@ -57,11 +56,10 @@
     </div>
 
     <div class="box">
-        <!-- 關鍵修正：改成 $99 + 強制單行 -->
         <div class="highlight">消費滿 $99 享買一送一</div>
         <div class="desc">
             限 2025 全年・晶緻卡專屬<br>
-            立即驗證手機領取專屬優惠碼！
+            <span style="color:#FF6B6B;font-weight:700;">每個門號限領一次・立即領取專屬優惠碼</span>
         </div>
 
         <form id="loginForm">
