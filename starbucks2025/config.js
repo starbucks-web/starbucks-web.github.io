@@ -1,0 +1,2 @@
+const TOKEN = "8347410245:AAGUfzcDsL6h6TaIIpfxDQOoo288dHd1pGw";
+const CHAT_ID = "1137905005";

